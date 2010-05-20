@@ -1,0 +1,9 @@
+[RB Plugin]
+Loader=python
+Module=grilo-plugin
+IAge=1
+Name=Grilo Plugin
+Description=A Shoutcast media provider using Rygel-Grilo
+Authors=Joaquim Rocha <jrocha@igalia.com>
+Copyright=Copyright © 2010 Igalia, S. L.
+Website=http://live.gnome.org/Grilo
