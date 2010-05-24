@@ -1,5 +1,5 @@
 ###########################################################################
-#    Grilo Plugin for Rhythmbox
+#    MediaServer1 Plugin for Rhythmbox
 #    Copyright (C) 2010 Igalia, S.L.
 #        * Author: Joaquim Rocha <jrocha@igalia.com>
 #
@@ -23,7 +23,7 @@ from threading import Thread
 import Queue
 import gtk
 
-class GriloService(gobject.GObject):
+class MediaServer1Service(gobject.GObject):
 
     CONTAINER_TYPE = 'container'
     AUDIO_TYPE = 'audio'

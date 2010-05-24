@@ -1,20 +1,21 @@
-===========================
-Grilo Plugin for Rhythmbox
-===========================
+==================================
+MediaServer1 Plugin for Rhythmbox
+==================================
 
 
 How to install it
 ==================
 
-Copy the *grilo-plugin* folder to ~/.gnome2/rhythmbox/plugins .
+Copy the *mediaserver1-plugin* folder to ~/.gnome2/rhythmbox/plugins .
 
-Run Rhythmbox and enable **Grilo Plugin** from the *Edit > Plugins* menu.
+Run Rhythmbox and enable **MediaServer1** plugin from the *Edit > Plugins*
+menu.
 
 
 How to use it
 ==============
 
-Choose **Grilo Plugin** from the left part in Rhythmbox; a list of services 
+Choose **MediaServer1** from the left part in Rhythmbox; a list of services
 should be already present.
 
 Double click a folder to retrieve its items, if an item is not a folder, and 

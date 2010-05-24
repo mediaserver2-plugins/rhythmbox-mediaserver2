@@ -1,5 +1,5 @@
 ###########################################################################
-#    Grilo Plugin for Rhythmbox
+#    MediaServer1 Plugin for Rhythmbox
 #    Copyright (C) 2010 Igalia, S.L.
 #        * Author: Joaquim Rocha <jrocha@igalia.com>
 #
@@ -22,24 +22,24 @@ import dbus
 import gobject
 import gtk
 import rhythmdb
-from griloservice import GriloService
+from mediaserver1service import MediaServer1Service
 
-class GriloSource(rb.BrowserSource):
+class MediaServer1Source(rb.BrowserSource):
 
     _TEXT_COLUMN = 0
     _PIXBUF_COLUMN = 1
     _MEDIA_OBJECT_COLUMN = 2
 
-    _MEDIA_OBJECT_TYPE_ICON_MAP = {GriloService.CONTAINER_TYPE: 'folder',
-                                   GriloService.AUDIO_TYPE: 'media-audio',
-                                   GriloService.VIDEO_TYPE: 'video'}
+    _MEDIA_OBJECT_TYPE_ICON_MAP = {MediaServer1Service.CONTAINER_TYPE: 'folder',
+                                   MediaServer1Service.AUDIO_TYPE: 'media-audio',
+                                   MediaServer1Service.VIDEO_TYPE: 'video'}
 
     def __init__(self):
         self.is_activated = False
-        rb.BrowserSource.__init__(self, name="Grilo")
+        rb.BrowserSource.__init__(self, name="MediaServer1")
         self.bus = dbus.SessionBus()
-        self.grilo_service = GriloService()
-        self.grilo_service.connect('media-retrieved', self._media_retrieved_cb)
+        self.mediaserver1_service = MediaServer1Service()
+        self.mediaserver1_service.connect('media-retrieved', self._media_retrieved_cb)
         self._icons_dict = self._get_icons()
 
     def do_impl_activate(self):
@@ -70,21 +70,21 @@ class GriloSource(rb.BrowserSource):
         self.reorder_child(folders_scrolled_window, 0)
 
         self.show_all()
-        self.grilo_service.get_media(None, None)
+        self.mediaserver1_service.get_media(None, None)
         rb.BrowserSource.do_impl_activate(self)
 
     def _tree_row_activated_cb(self, tree_view, path, view_column):
         iter = self.tree_model.get_iter(path)
         media_obj = self.tree_model.get_value(iter,
                                               self._MEDIA_OBJECT_COLUMN)
-        if media_obj.obj_type == GriloService.CONTAINER_TYPE and \
+        if media_obj.obj_type == MediaServer1Service.CONTAINER_TYPE and \
            not self.tree_model.iter_has_child(iter):
-            self.grilo_service.get_media(media_obj, iter)
+            self.mediaserver1_service.get_media(media_obj, iter)
             return
         self._add_to_db(media_obj)
 
     def _add_to_db(self, media_obj):
-        urls = media_obj.properties.get(GriloService.URLS_PROPERTY)
+        urls = media_obj.properties.get(MediaServer1Service.URLS_PROPERTY)
         if not urls:
             return
         location = urls[0]
@@ -92,18 +92,18 @@ class GriloSource(rb.BrowserSource):
         if entry is None:
             entry = self._db.entry_new(self.props.entry_type, location)
             self._db.set(entry, rhythmdb.PROP_TITLE, media_obj.name)
-            artist = media_obj.properties.get(GriloService.ARTIST_PROPERTY)
+            artist = media_obj.properties.get(MediaServer1Service.ARTIST_PROPERTY)
             if artist:
                 self._db.set(entry, rhythmdb.PROP_ARTIST, artist)
-            album = media_obj.properties.get(GriloService.ALBUM_PROPERTY)
+            album = media_obj.properties.get(MediaServer1Service.ALBUM_PROPERTY)
             if album:
                 self._db.set(entry, rhythmdb.PROP_ALBUM, album)
-            duration = media_obj.properties.get(GriloService.DURATION_PROPERTY)
+            duration = media_obj.properties.get(MediaServer1Service.DURATION_PROPERTY)
             if duration is not None:
                 self._db.set(entry, rhythmdb.PROP_DURATION, duration)
             self._db.commit()
 
-    def _media_retrieved_cb(self, grilo_service, media_obj_list):
+    def _media_retrieved_cb(self, mediaserver1_service, media_obj_list):
         for media_obj in media_obj_list:
             parent_iter = media_obj.parent_iter
             icon = self._get_icon_for_media_object(media_obj)
@@ -132,7 +132,7 @@ class GriloSource(rb.BrowserSource):
         return None
 
     def do_impl_delete_thyself(self):
-        self.grilo_service.stopped = True
+        self.mediaserver1_service.stopped = True
         rb.BrowserSource.do_impl_delete_thyself(self)
 
-gobject.type_register(GriloSource)
+gobject.type_register(MediaServer1Source)
