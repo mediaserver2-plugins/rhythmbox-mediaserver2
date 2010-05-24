@@ -110,6 +110,8 @@ class MediaServer1Source(rb.BrowserSource):
             self.tree_model.insert(parent_iter, 0, [media_obj.name,
                                                     icon,
                                                     media_obj])
+            if parent_iter:
+                self.media_folders_view.expand_row(self.tree_model.get_path(parent_iter), False)
 
     def _get_icon_for_media_object(self, media_obj):
         icon_name = self._MEDIA_OBJECT_TYPE_ICON_MAP.get(media_obj.obj_type)
