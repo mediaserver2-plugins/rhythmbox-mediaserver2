@@ -1,9 +1,9 @@
 [RB Plugin]
 Loader=python
-Module=mediaserver1-plugin
+Module=mediaserver2-plugin
 IAge=1
-Name=MediaServer1
-Description=Plugin to access content shared through MediaServer1 specification
+Name=MediaServer2
+Description=Plugin to access content shared through MediaServer2 specification
 Authors=Joaquim Rocha <jrocha@igalia.com>
 Copyright=Copyright © 2010 Igalia, S. L.
 Website=http://live.gnome.org/Grilo

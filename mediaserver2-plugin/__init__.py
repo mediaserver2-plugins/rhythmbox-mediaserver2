@@ -1,5 +1,5 @@
 ###########################################################################
-#    MediaServer1 Plugin for Rhythmbox
+#    MediaServer2 Plugin for Rhythmbox
 #    Copyright (C) 2010 Igalia, S.L.
 #        * Author: Joaquim Rocha <jrocha@igalia.com>
 #
@@ -18,10 +18,10 @@
 ###########################################################################
 
 import rb
-from mediaserver1source import MediaServer1Source
+from mediaserver2source import MediaServer2Source
 import gobject
 
-class MediaServer1(rb.Plugin):
+class MediaServer2(rb.Plugin):
 
     def __init__(self):
         rb.Plugin.__init__(self)
@@ -29,10 +29,10 @@ class MediaServer1(rb.Plugin):
     def activate(self, shell):
         self.shell = shell
         self.db = self.shell.props.db
-        self.entry_type = self.db.entry_register_type('MediaServer1EntryType')
-        self.source = gobject.new (MediaServer1Source,
+        self.entry_type = self.db.entry_register_type('MediaServer2EntryType')
+        self.source = gobject.new (MediaServer2Source,
                                    shell=self.shell,
-                                   name="MediaServer1",
+                                   name="MediaServer2",
                                    entry_type=self.entry_type)
         self.shell.register_entry_type_for_source(self.source,
                                                   self.entry_type)

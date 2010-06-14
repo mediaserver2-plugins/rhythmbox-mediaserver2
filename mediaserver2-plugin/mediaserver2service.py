@@ -1,5 +1,5 @@
 ###########################################################################
-#    MediaServer1 Plugin for Rhythmbox
+#    MediaServer2 Plugin for Rhythmbox
 #    Copyright (C) 2010 Igalia, S.L.
 #        * Author: Joaquim Rocha <jrocha@igalia.com>
 #
@@ -23,7 +23,7 @@ from threading import Thread
 import Queue
 import gtk
 
-class MediaServer1Service(gobject.GObject):
+class MediaServer2Service(gobject.GObject):
 
     CONTAINER_TYPE = 'container'
     AUDIO_TYPE = 'audio'
@@ -46,14 +46,14 @@ class MediaServer1Service(gobject.GObject):
     _MEDIA_OBJECT_INFO_LIST = [URLS_PROPERTY, ARTIST_PROPERTY,
                                ALBUM_PROPERTY, DURATION_PROPERTY]
 
-    _DBUS_MEDIA_SERVER_1_NAME_PREFIX = 'org.gnome.UPnP.MediaServer1.'
-    _DBUS_MEDIA_SERVER_1_PATH_PREFIX = '/org/gnome/UPnP/MediaServer1/'
+    _DBUS_MEDIA_SERVER_1_NAME_PREFIX = 'org.gnome.UPnP.MediaServer2.'
+    _DBUS_MEDIA_SERVER_1_PATH_PREFIX = '/org/gnome/UPnP/MediaServer2/'
 
-    _MEDIA_SERVER_1_DBUS_NAME_PREFIX = 'org.gnome.UPnP.MediaServer1.'
+    _MEDIA_SERVER_1_DBUS_NAME_PREFIX = 'org.gnome.UPnP.MediaServer2.'
 
-    _DBUS_MEDIA_CONTAINER_1_INTERFACE = 'org.gnome.UPnP.MediaContainer1'
-    _DBUS_MEDIA_OBJECT_1_INTERFACE = 'org.gnome.UPnP.MediaObject1'
-    _DBUS_MEDIA_ITEM_1_INTERFACE = 'org.gnome.UPnP.MediaItem1'
+    _DBUS_MEDIA_CONTAINER_1_INTERFACE = 'org.gnome.UPnP.MediaContainer2'
+    _DBUS_MEDIA_OBJECT_1_INTERFACE = 'org.gnome.UPnP.MediaObject2'
+    _DBUS_MEDIA_ITEM_1_INTERFACE = 'org.gnome.UPnP.MediaItem2'
 
     def __init__(self):
         gobject.GObject.__init__(self)
